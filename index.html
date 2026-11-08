@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIVITAS — Общественная платформа</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">CIVITAS<span>.</span></div>
+    <div class="header-right">
+        <button onclick="toggleTheme()" id="themeBtn">☀</button>
+        <button onclick="showAuth()">Войти</button>
+        <button class="primary" onclick="showRegister()">Регистрация</button>
+    </div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+    <h3>МЕНЮ</h3>
+    <button onclick="navigate('home')">🏠 Главная</button>
+    <button onclick="navigate('news')">📰 Новости</button>
+    <button onclick="navigate('politics')">🏛 Политика</button>
+    <button onclick="navigate('economy')">📈 Экономика</button>
+    <button onclick="navigate('society')">🌍 Общество</button>
+    <button onclick="navigate('users')">👥 Пользователи</button>
+    <button onclick="navigate('profile')">👤 Мой профиль</button>
+    <button onclick="navigate('saved')">🔖 Избранное</button>
+    <hr>
+    <p class="small">CIVITAS COMMUNITY</p>
+    <p class="small">Версия 1.0.0</p>
+</aside>
+
+<main class="content">
+
+<section id="home" class="page active">
+    <div class="hero">
+        <div>
+            <span class="tag">ОБЩЕСТВЕННАЯ ПЛАТФОРМА</span>
+            <h1>Твой голос имеет значение.</h1>
+            <p>Читайте новости, обсуждайте события и делитесь собственным мнением.</p>
+            <button class="primary" onclick="navigate('news')">Открыть ленту →</button>
+        </div>
+    </div>
+
+    <h2>Последние публикации</h2>
+    <div id="homePosts" class="posts"></div>
+</section>
+
+<section id="news" class="page">
+    <h1>Новости и публикации</h1>
+    <p class="muted">Последние материалы сообщества.</p>
+
+    <div class="create-box">
+        <h3>Создать публикацию</h3>
+        <input id="postTitle" placeholder="Заголовок публикации">
+        <select id="postCategory">
+            <option>Общество</option>
+            <option>Политика</option>
+            <option>Экономика</option>
+            <option>Технологии</option>
+            <option>Наука</option>
+            <option>Другое</option>
+        </select>
+        <textarea id="postText" placeholder="Что хотите рассказать?"></textarea>
+        <button class="primary" onclick="createPost()">Опубликовать</button>
+    </div>
+
+    <input id="searchPosts" placeholder="🔎 Поиск публикаций..." oninput="renderPosts()">
+    <div id="allPosts" class="posts"></div>
+</section>
+
+<section id="politics" class="page">
+    <h1>Политика</h1>
+    <p class="muted">Обсуждение государственных решений, международных отношений и общественных процессов.</p>
+    <div id="politicsPosts" class="posts"></div>
+</section>
+
+<section id="economy" class="page">
+    <h1>Экономика</h1>
+    <p class="muted">Бизнес, финансы, рынок и экономические события.</p>
+    <div id="economyPosts" class="posts"></div>
+</section>
+
+<section id="society" class="page">
+    <h1>Общество</h1>
+    <p class="muted">Образование, культура, общественная жизнь и технологии.</p>
+    <div id="societyPosts" class="posts"></div>
+</section>
+
+<section id="users" class="page">
+    <h1>Участники сообщества</h1>
+    <input id="userSearch" placeholder="Найти пользователя..." oninput="renderUsers()">
+    <div id="usersList" class="user-grid"></div>
+</section>
+
+<section id="profile" class="page">
+    <h1>Мой профиль</h1>
+    <div id="profileContent"></div>
+</section>
+
+<section id="saved" class="page">
+    <h1>Избранное</h1>
+    <div id="savedPosts" class="posts"></div>
+</section>
+
+<section id="auth" class="page">
+    <div class="auth-box">
+        <h1>Вход</h1>
+        <input id="loginEmail" type="email" placeholder="Электронная почта">
+        <input id="loginPassword" type="password" placeholder="Пароль">
+        <button class="primary full" onclick="login()">Войти</button>
+        <p>Нет аккаунта? <a onclick="navigate('register')">Зарегистрироваться</a></p>
+    </div>
+</section>
+
+<section id="register" class="page">
+    <div class="auth-box">
+        <h1>Создать аккаунт</h1>
+        <input id="regName" placeholder="Имя пользователя">
+        <input id="regEmail" type="email" placeholder="Электронная почта">
+        <input id="regPassword" type="password" placeholder="Пароль (от 8 символов)">
+        <button class="primary full" onclick="register()">Зарегистрироваться</button>
+        <p>Уже есть аккаунт? <a onclick="navigate('auth')">Войти</a></p>
+    </div>
+</section>
+
+<section id="postDetails" class="page">
+    <div id="postDetailContent"></div>
+</section>
+
+</main>
+
+<aside class="rightbar">
+    <div class="right-card">
+        <h3>О платформе</h3>
+        <p>CIVITAS — пространство для обмена мнениями и обсуждения общественных событий.</p>
+    </div>
+    <div class="right-card">
+        <h3>Разделы</h3>
+        <p>🏛 Политика</p>
+        <p>📈 Экономика</p>
+        <p>🌍 Общество</p>
+        <p>🔬 Наука</p>
+    </div>
+    <div class="right-card">
+        <h3>Правила сообщества</h3>
+        <p>Уважайте других участников. Не публикуйте спам и ложную информацию.</p>
+    </div>
+</aside>
+
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <button class="close" onclick="closeModal()">✕</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 CIVITAS COMMUNITY</p>
+    <p>Общение • Новости • Общество</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+      </html>
